@@ -3,6 +3,8 @@ LABEL maintainer="dietrich.zinsou@hpe.com"
 
 RUN yum install -y curl tar python python-setuptools python-argparse
 
-COPY appconfig.tgz /opt/configscripts/appconfig.tgz
+COPY ./kubedirector/ /tmp/
+RUN cd /tmp/ && tar czf appconfig.tgz appconfig/ && mkdir /opt/configscripts && cp appconfig.tgz /opt/configscripts/appconfig.tgz && rm -rf appconfig*
+#COPY appconfig.tgz /opt/configscripts/appconfig.tgz
 
 CMD ["/sbin/init"]
